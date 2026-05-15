@@ -4,8 +4,21 @@
 
 using namespace std;
 
-void ClinicManager::registerAnimal(Animal animal) {
-    patients.push_back(animal);
+
+void ClinicManager::registerAnimal(Animal animal, string ownerPhone) {
+    Owner* owner = findOwnerByPhoneNb(ownerPhone);
+
+    if (owner != nullptr) {
+        patients.push_back(animal);
+
+        Animal* animalPtr = &patients.back();
+
+        owner->addAnimal(animalPtr);
+        
+        cout << "Zarejestrowano " << animal.getName() << " dla wlasciciela: " << owner->getFullName() << endl;
+    } else {
+        cout << "Blad: Nie znaleziono wlasciciela o nazwie " << owner->getFullName() << endl;
+    }
 }
 
 Owner* ClinicManager::findOwnerByAnimalId(int animalId) {
@@ -18,6 +31,14 @@ Owner* ClinicManager::findOwnerByAnimalId(int animalId) {
         }
     }  
     return nullptr;
+}
+
+Owner* ClinicManager::findOwnerByPhoneNb(string PhoneNumber) {
+    for (auto& owner : owners) {
+        if (owner.getPhoneNumber() == PhoneNumber) {
+            return &owner;         }
+    }
+    return nullptr; 
 }
 
 Animal ClinicManager::findAnimal(int id) {
