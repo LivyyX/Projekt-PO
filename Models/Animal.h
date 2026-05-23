@@ -18,9 +18,8 @@ private:
 public:
     Animal(int id, string name, string species, double weight);
 
-    void addVisit(Visit visit);
-    vector<Visit> getHistory() const;
-
+    void addVisit(Visit&& visit);
+    const vector<Visit>& getHistory() const;
     int getId() const { return id; }
     string getName() const { return name; }
 };

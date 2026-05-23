@@ -18,11 +18,12 @@ private:
 public:
     ClinicManager(){patients.reserve(1000);};
     void registerAnimal(Animal animal,string ownerPhone);
-    Animal findAnimal(int id);     
+    Animal* findAnimal(int id);     
     void saveToFile(string filename);
     void loadFromFile(string filename);
     Owner* findOwnerByAnimalId(int animalId);
     Owner* findOwnerByPhoneNb(string PhoneNumber);
+    void addOwner(const Owner& owner);
 };
 
 #endif

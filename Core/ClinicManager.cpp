@@ -9,15 +9,14 @@ void ClinicManager::registerAnimal(Animal animal, string ownerPhone) {
     Owner* owner = findOwnerByPhoneNb(ownerPhone);
 
     if (owner != nullptr) {
-        patients.push_back(animal);
+        patients.push_back(move(animal));
 
         Animal* animalPtr = &patients.back();
 
         owner->addAnimal(animalPtr);
-        
-        cout << "Zarejestrowano " << animal.getName() << " dla wlasciciela: " << owner->getFullName() << endl;
+        cout << "Zarejestrowano " << animalPtr->getName() << " dla wlasciciela: " << owner->getFullName() << endl;
     } else {
-        cout << "Blad: Nie znaleziono wlasciciela o nazwie " << owner->getFullName() << endl;
+        cout << "Blad: Nie znaleziono wlasciciela o numerze telefonu: " << ownerPhone << endl;
     }
 }
 
@@ -41,14 +40,13 @@ Owner* ClinicManager::findOwnerByPhoneNb(string PhoneNumber) {
     return nullptr; 
 }
 
-Animal ClinicManager::findAnimal(int id) {
-    for (const auto& animal : patients) {
+Animal* ClinicManager::findAnimal(int id) {
+    for (auto& animal : patients) {
         if (animal.getId() == id) {
-            return animal;
+            return &animal;
         }
     }
-    
-    return Animal(-1, "Not Found", "Unknown", 0.0);
+    return nullptr;
 }
 
 
@@ -61,4 +59,8 @@ void ClinicManager::saveToFile(string filename) {
 void ClinicManager::loadFromFile(string filename) {
     string data = fileHandler.read(filename);
     cout << "Wczytano dane z pliku: " << filename << endl;
+}
+
+void ClinicManager::addOwner(const Owner& owner) {
+    owners.push_back(owner);
 }

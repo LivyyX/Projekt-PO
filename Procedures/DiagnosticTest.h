@@ -1,7 +1,7 @@
 #ifndef DIAGNOSTICTEST_H
 #define DIAGNOSTICTEST_H
 
-#include "MedicalProcedure.h"
+#include "../Models/MedicalProcedure.h"
 
 class DiagnosticTest : public MedicalProcedure {
 private:

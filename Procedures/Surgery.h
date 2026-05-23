@@ -1,7 +1,7 @@
 #ifndef SURGERY_H
 #define SURGERY_H
 
-#include "MedicalProcedure.h"
+#include "../Models/MedicalProcedure.h"
 
 class Surgery : public MedicalProcedure {
 private:

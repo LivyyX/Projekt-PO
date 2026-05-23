@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory> // Potrzebne do unique_ptr
-#include "MedicalProcedure.h"
+#include "../Models/MedicalProcedure.h"
 
 using namespace std;
 

@@ -4,10 +4,10 @@ using namespace std;
 Animal::Animal(int id, string name, string species, double weight)
     : id(id), name(name), species(species), weight(weight) {}
 
-void Animal::addVisit(Visit visit) {
-    history.push_back(visit);
+void Animal::addVisit(Visit&& visit) {
+    history.push_back(move(visit));
 }
 
-vector<Visit> Animal::getHistory() const { //const -- funkcja do podgądu
+const vector<Visit>& Animal::getHistory() const { 
     return history;
 }

@@ -1,7 +1,7 @@
 #ifndef VACCINATION_H
 #define VACCINATION_H
 
-#include "MedicalProcedure.h"
+#include "../Models/MedicalProcedure.h"
 
 class Vaccination : public MedicalProcedure {
 private:

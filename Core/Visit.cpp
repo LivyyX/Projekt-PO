@@ -36,5 +36,4 @@ double Visit::calculateTotalCost() const {
         total += proc->getPrice();
     }
     return total;
-    }
 }
