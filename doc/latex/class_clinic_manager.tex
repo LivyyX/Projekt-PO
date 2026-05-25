@@ -1,0 +1,62 @@
+\doxysection{Clinic\+Manager Class Reference}
+\hypertarget{class_clinic_manager}{}\label{class_clinic_manager}\index{ClinicManager@{ClinicManager}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_clinic_manager_a9db3afc88b523389d7f0ec085a3889af}{register\+Animal}} (\doxymbox{\hyperlink{class_animal}{Animal}} animal, string owner\+Phone)
+\begin{DoxyCompactList}\small\item\em Rejestruje nowego użytkownika (np. pacjenta lub lekarza) w systemie. \end{DoxyCompactList}\item 
+\Hypertarget{class_clinic_manager_ac2981f661d1b17715adc5a03fce21924}\label{class_clinic_manager_ac2981f661d1b17715adc5a03fce21924} 
+\doxymbox{\hyperlink{class_animal}{Animal}} \texorpdfstring{$\ast$}{*} {\bfseries find\+Animal} (int id)
+\item 
+\Hypertarget{class_clinic_manager_aa2374e1509a0c67f9da1c426f85a17c6}\label{class_clinic_manager_aa2374e1509a0c67f9da1c426f85a17c6} 
+void {\bfseries save\+To\+File} (string filename)
+\item 
+\Hypertarget{class_clinic_manager_a5624460dc616de39f7e6b83168ddd473}\label{class_clinic_manager_a5624460dc616de39f7e6b83168ddd473} 
+void {\bfseries load\+From\+File} (string filename)
+\item 
+\Hypertarget{class_clinic_manager_a72390471c9a335171b4ef12aeb2f595c}\label{class_clinic_manager_a72390471c9a335171b4ef12aeb2f595c} 
+\doxymbox{\hyperlink{class_owner}{Owner}} \texorpdfstring{$\ast$}{*} {\bfseries find\+Owner\+By\+Animal\+Id} (int animal\+Id)
+\item 
+\Hypertarget{class_clinic_manager_a2f578bbdc57147e2d54934eb03f2a8b3}\label{class_clinic_manager_a2f578bbdc57147e2d54934eb03f2a8b3} 
+\doxymbox{\hyperlink{class_owner}{Owner}} \texorpdfstring{$\ast$}{*} {\bfseries find\+Owner\+By\+Phone\+Nb} (string Phone\+Number)
+\item 
+\Hypertarget{class_clinic_manager_a67c61ade87dcd62d6225a3794892c849}\label{class_clinic_manager_a67c61ade87dcd62d6225a3794892c849} 
+void {\bfseries add\+Owner} (const \doxymbox{\hyperlink{class_owner}{Owner}} \&owner)
+\end{DoxyCompactItemize}
+
+
+\label{class_clinic_manager_doc-func-members}
+\Hypertarget{class_clinic_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_clinic_manager_a9db3afc88b523389d7f0ec085a3889af}\index{ClinicManager@{ClinicManager}!registerAnimal@{registerAnimal}}
+\index{registerAnimal@{registerAnimal}!ClinicManager@{ClinicManager}}
+\doxysubsubsection{\texorpdfstring{registerAnimal()}{registerAnimal()}}
+{\footnotesize\ttfamily \label{class_clinic_manager_a9db3afc88b523389d7f0ec085a3889af} 
+void Clinic\+Manager::\+register\+Animal (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_animal}{Animal}}}]{animal}{, }\item[{string}]{owner\+Phone}{}\end{DoxyParamCaption})}
+
+
+
+Rejestruje nowego użytkownika (np. pacjenta lub lekarza) w systemie. 
+
+
+\begin{DoxyItemize}
+\item Funkcja sprawdza unikalność loginu w bazie danych kliniki, a następnie bezpiecznie zapisuje profil użytkownika.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em owner\+Phone} & Unikalny identyfikator (login) użytkownika. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}Autoryzuje użytkownika w systemie kliniki. 
+\begin{DoxyParams}{Parameters}
+{\em animal} & zwierzę. \\
+\hline
+{\em owner\+Phone} & id właściciela.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+Clinic\+Manager.\+h\item 
+Core/\+Clinic\+Manager.\+cpp\end{DoxyCompactItemize}

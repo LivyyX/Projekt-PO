@@ -4,8 +4,23 @@
 
 using namespace std;
 
+/**
+ * @file main.cpp
+ * @brief Główny plik startowy systemu bazy kliniki.
+ */
 
+/**
+ * @brief Rejestruje nowego użytkownika (np. pacjenta lub lekarza) w systemie.
+ * * Funkcja sprawdza unikalność loginu w bazie danych kliniki, a następnie
+ * bezpiecznie zapisuje profil użytkownika.
+ * * @param ownerPhone Unikalny identyfikator (login) użytkownika.
+ */
 void ClinicManager::registerAnimal(Animal animal, string ownerPhone) {
+    /**
+ * @brief Autoryzuje użytkownika w systemie kliniki.
+ * @param animal zwierzę.
+ * @param ownerPhone id właściciela.
+ */
     Owner* owner = findOwnerByPhoneNb(ownerPhone);
 
     if (owner != nullptr) {

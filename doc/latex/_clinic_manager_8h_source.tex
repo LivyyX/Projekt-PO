@@ -1,0 +1,35 @@
+\doxysection{Clinic\+Manager.\+h}
+\hypertarget{_clinic_manager_8h_source}{}\label{_clinic_manager_8h_source}\index{Core/ClinicManager.h@{Core/ClinicManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CLINICMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CLINICMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Models/Animal.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Models/Owner.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Infrastructure/FileHandler.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }ClinicManager\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \ \ vector<Animal>\ patients;\ }
+\DoxyCodeLine{00015\ \ \ \ \ vector<Owner>\ owners;\ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{class_file_handler}{FileHandler}}\ fileHandler;\ \ \ \ \ \ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ ClinicManager()\{patients.reserve(1000);\};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_clinic_manager_a9db3afc88b523389d7f0ec085a3889af}{registerAnimal}}(\doxymbox{\hyperlink{class_animal}{Animal}}\ animal,\textcolor{keywordtype}{string}\ ownerPhone);}
+\DoxyCodeLine{00021\ \ \ \ \ \doxymbox{\hyperlink{class_animal}{Animal}}*\ findAnimal(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id});\ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ saveToFile(\textcolor{keywordtype}{string}\ filename);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ loadFromFile(\textcolor{keywordtype}{string}\ filename);}
+\DoxyCodeLine{00024\ \ \ \ \ \doxymbox{\hyperlink{class_owner}{Owner}}*\ findOwnerByAnimalId(\textcolor{keywordtype}{int}\ animalId);}
+\DoxyCodeLine{00025\ \ \ \ \ \doxymbox{\hyperlink{class_owner}{Owner}}*\ findOwnerByPhoneNb(\textcolor{keywordtype}{string}\ PhoneNumber);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ addOwner(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_owner}{Owner}}\&\ owner);}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

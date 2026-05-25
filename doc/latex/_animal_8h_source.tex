@@ -1,0 +1,33 @@
+\doxysection{Animal.\+h}
+\hypertarget{_animal_8h_source}{}\label{_animal_8h_source}\index{Models/Animal.h@{Models/Animal.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ANIMAL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ANIMAL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Core/Visit.h"{}}\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }Animal\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ species;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ weight;}
+\DoxyCodeLine{00016\ \ \ \ \ vector<Visit>\ history;\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ Animal(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{string}\ name,\ \textcolor{keywordtype}{string}\ species,\ \textcolor{keywordtype}{double}\ weight);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ addVisit(\doxymbox{\hyperlink{class_visit}{Visit}}\&\&\ visit);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{const}\ vector<Visit>\&\ getHistory()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ getId()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ id;\ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{string}\ getName()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ name;\ \}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

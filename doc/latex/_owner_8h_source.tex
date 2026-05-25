@@ -1,0 +1,35 @@
+\doxysection{Owner.\+h}
+\hypertarget{_owner_8h_source}{}\label{_owner_8h_source}\index{Models/Owner.h@{Models/Owner.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OWNER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OWNER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Animal.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }Owner\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ firstName;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{string}\ lastName;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ phoneNumber;}
+\DoxyCodeLine{00015\ \ \ \ \ vector<Animal*>\ animals;\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ Owner(\textcolor{keywordtype}{string}\ fName,\ \textcolor{keywordtype}{string}\ lName,\ \textcolor{keywordtype}{string}\ phone);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ addAnimal(\doxymbox{\hyperlink{class_animal}{Animal}}*\ animal);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{const}\ vector<Animal*>\&\ getAnimals()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{string}\ getFullName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{string}\ getPhoneNumber()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ phoneNumber;\ \}}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
