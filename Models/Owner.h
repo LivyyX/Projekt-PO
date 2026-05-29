@@ -24,6 +24,7 @@ public:
 
     string getFullName() const;
     string getPhoneNumber() const { return phoneNumber; }
+    void serialize(ostream& os) const;
 };
 
 #endif

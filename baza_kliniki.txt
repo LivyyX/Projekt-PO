@@ -1,1 +1,4 @@
-Tu coś jeszcze bedzie.
+OWNER|makto|dualip|123456789
+ANIMAL|1|ala|kot|13|123456789
+VISIT|12-12-12|kuku|1
+VISIT|12|12|1

@@ -6,7 +6,7 @@ using namespace std;
 
 class FileHandler {
 public:
-    void save(string data, string filename);
+    void save(const string& filename, const string& data);
     string read(string filename);
 };
 

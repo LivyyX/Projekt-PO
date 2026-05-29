@@ -14,6 +14,7 @@ public:
     void perform() override;
     string getDetails() const override;
     double getPrice() const override; 
+    void serialize(ostream& os) const override;
 };
 
 #endif

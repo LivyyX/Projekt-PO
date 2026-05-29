@@ -13,6 +13,8 @@ public:
 
     void perform() override;
     string getDetails() const override;
+    void serialize(ostream& os) const override;
+
 };
 
 #endif

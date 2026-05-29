@@ -18,3 +18,7 @@ void DiagnosticTest::perform() {
 string DiagnosticTest::getDetails() const {
     return "Badanie diagnostyczne [" + testType + "] - Wynik: " + resultValue;
 }
+
+void DiagnosticTest::serialize(ostream& os) const {
+    os << "PROCEDURE|DIAGNOSTIC TEST|" << basePrice << "|" << testType << "|" << resultValue << "\n";
+}

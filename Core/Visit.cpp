@@ -37,3 +37,7 @@ double Visit::calculateTotalCost() const {
     }
     return total;
 }
+
+void Visit::serialize(ostream& os,int animalid) const {
+    os << "VISIT|" << date << "|" << description <<"|"<< animalid <<"\n";
+}

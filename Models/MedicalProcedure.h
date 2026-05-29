@@ -22,6 +22,7 @@ public:
     virtual double getPrice() const {
         return basePrice;
     }
+    virtual void serialize(ostream& os) const = 0;
 
 };
 

@@ -26,3 +26,7 @@ double Surgery::getPrice() const {
     double finalPrice = basePrice + (complexityLevel * 150.0);
     return finalPrice;
 }
+
+void Surgery::serialize(ostream& os) const {
+    os << "PROCEDURE|SURGERY|" << basePrice << "|" << anesthesiaDose << "|" << complexityLevel << "\n";
+}

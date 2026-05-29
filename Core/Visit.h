@@ -23,6 +23,11 @@ public:
     void finalize();
 
     double calculateTotalCost() const;
+
+    void serialize(ostream& os,int animalid) const;
+
+    string getDate() const { return date; }
+    string getDescription() const { return description; }
 };
 
 #endif

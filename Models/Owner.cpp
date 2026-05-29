@@ -1,4 +1,5 @@
 #include "Owner.h"
+#include <ostream>
 using namespace std;
 
 Owner::Owner(string fName, string lName, string phone)
@@ -16,4 +17,7 @@ const vector<Animal*>& Owner::getAnimals() const {
 
 string Owner::getFullName() const {
     return firstName + " " + lastName;
+}
+void Owner::serialize(ostream& os) const {
+    os << "OWNER|" << firstName << "|" << lastName << "|" << phoneNumber << "\n";
 }

@@ -17,3 +17,6 @@ void Vaccination::perform() {
 string Vaccination::getDetails() const {
     return "Szczepienie [" + vaccineType + "] - Termin kolejnej dawki: " + nextDueDate;
 }
+void Vaccination::serialize(ostream& os) const {
+    os << "PROCEDURE|VACCINATION|" << basePrice << "|" << vaccineType << "|" << nextDueDate << "\n";
+}

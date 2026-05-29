@@ -22,6 +22,7 @@ public:
     const vector<Visit>& getHistory() const;
     int getId() const { return id; }
     string getName() const { return name; }
+    void serialize(ostream& os,const string& ownerPhone) const;
 };
 
 #endif
