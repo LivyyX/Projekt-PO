@@ -196,7 +196,6 @@ void ClinicManager::loadFromFile(string filename) {
                     double price = stod(priceStr);
 
                     if (procType == "Vaccination") {
-                        // Konstruktor Vaccination oczekuje: price (double), type (string), date (string)
                         string vacType, vacDate;
                         getline(procStream, vacType, '|');
                         getline(procStream, vacDate, '\n');
@@ -205,21 +204,17 @@ void ClinicManager::loadFromFile(string filename) {
                         newVisit.addProcedure(make_unique<Vaccination>(price, vacType, vacDate));
                     } 
                     else if (procType == "Surgery") {
-                        // Konstruktor Surgery oczekuje: price (double), dose (double), level (int)
                         string doseStr, levelStr;
                         getline(procStream, doseStr, '|');
                         getline(procStream, levelStr, '\n');
                         if (!levelStr.empty() && levelStr.back() == '\r') levelStr.pop_back();
 
-                        // Konwersja stringów na odpowiednie liczby (double i int)
                         double dose = stod(doseStr);
                         int level = stoi(levelStr);
 
                         newVisit.addProcedure(make_unique<Surgery>(price, dose, level));
                     } 
                     else if (procType == "DiagnosticTest") {
-                        // Upewnij się, że ten konstruktor też zgadza się z Twoim plikiem DiagnosticTest.h!
-                        // Zakładam, że przyjmuje: (double price, string type, string result)
                         string testType, result;
                         getline(procStream, testType, '|');
                         getline(procStream, result, '\n');
