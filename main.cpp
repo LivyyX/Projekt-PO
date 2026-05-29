@@ -84,14 +84,19 @@ int main() {
                     cout << "ID: " << patient->getId() << " | Imie: " << patient->getName() << "\n";
                     cout << "--- HISTORIA LECZENIA ---\n";
                     
-                    for (const auto& visit : patient->getHistory()) {
+                    const auto& history = patient->getHistory();
+                    if (history.empty()) {
+                        cout << "[Brak zarejestrowanych wizyt dla tego pacjenta]\n";
+                    } else {
+                        for (auto& visit : history) {
+                            visit.finalize();
+                        }
                     }
                 } else {
-                    cout << "Nie znaleziono pacjenta o podanym ID: " << id << "\n"; 
+                    cout << "Nie znaleziono pacjenta o podanym ID.\n";
                 }
-                break;
+            break;
             }
-
             case 3: {
                 cout << "\n--- KREATOR WIZYTY MEDYCZNEJ ---\n";
                 int animalid;

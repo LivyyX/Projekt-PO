@@ -20,7 +20,7 @@ public:
 
     void addProcedure(unique_ptr<MedicalProcedure> procedure);
 
-    void finalize();
+    void finalize() const;
 
     double calculateTotalCost() const;
 
@@ -28,6 +28,9 @@ public:
 
     string getDate() const { return date; }
     string getDescription() const { return description; }
+    const vector<unique_ptr<MedicalProcedure>>& getProcedures() const {
+    return procedures;
+    }
 };
 
 #endif

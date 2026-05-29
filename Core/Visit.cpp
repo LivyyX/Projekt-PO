@@ -15,7 +15,7 @@ void Visit::addProcedure(unique_ptr<MedicalProcedure> procedure) {
     }
 }
 
-void Visit::finalize() {
+void Visit::finalize() const {
     cout << "Finalizowanie wizyty z dnia: " << date << endl;
     cout << "Opis wizyty: " << description << endl;
     

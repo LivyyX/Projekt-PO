@@ -92,6 +92,12 @@ void ClinicManager::saveToFile(string filename) {
         }
         
         animal.serialize(ss, ownerPhone);
+        for (const auto& visit : animal.getHistory()) {
+            ss << "VISIT|" << visit.getDate() << "|" << visit.getDescription() << "|" << animal.getId() << "\n";
+            for (const auto& proc : visit.getProcedures()) {
+                proc->serialize(ss); 
+            }
+        }
     }
 
     fileHandler.save(filename, ss.str());

@@ -14,8 +14,4 @@ const vector<Visit>& Animal::getHistory() const {
 }
 void Animal::serialize(ostream& os, const string& ownerPhone) const {
     os << "ANIMAL|" << id << "|" << name << "|" << species << "|" << weight <<"|"<<ownerPhone<< "\n";
-
-    for (const auto& visit:history){
-        visit.serialize(os,id);
-    }
 }
