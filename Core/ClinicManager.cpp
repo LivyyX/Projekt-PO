@@ -93,7 +93,7 @@ void ClinicManager::saveToFile(string filename) {
         
         animal.serialize(ss, ownerPhone);
         for (const auto& visit : animal.getHistory()) {
-            ss << "VISIT|" << visit.getDate() << "|" << visit.getDescription() << "|" << animal.getId() << "\n";
+            visit.serialize(ss,animal.getId());
             for (const auto& proc : visit.getProcedures()) {
                 proc->serialize(ss); 
             }
@@ -190,6 +190,8 @@ void ClinicManager::loadFromFile(string filename) {
 
             while (getline(ss, nextLine)) {
                 if (nextLine.empty()) continue;
+                // Usuwamy windowsowy znak końca linii
+                if (nextLine.back() == '\r') nextLine.pop_back();
 
                 stringstream procStream(nextLine);
                 string subType;
@@ -201,7 +203,7 @@ void ClinicManager::loadFromFile(string filename) {
                     getline(procStream, priceStr, '|');
                     double price = stod(priceStr);
 
-                    if (procType == "Vaccination") {
+                    if (procType == "VACCINATION") {
                         string vacType, vacDate;
                         getline(procStream, vacType, '|');
                         getline(procStream, vacDate, '\n');
@@ -209,7 +211,7 @@ void ClinicManager::loadFromFile(string filename) {
 
                         newVisit.addProcedure(make_unique<Vaccination>(price, vacType, vacDate));
                     } 
-                    else if (procType == "Surgery") {
+                    else if (procType == "SURGERY") {
                         string doseStr, levelStr;
                         getline(procStream, doseStr, '|');
                         getline(procStream, levelStr, '\n');
@@ -220,7 +222,7 @@ void ClinicManager::loadFromFile(string filename) {
 
                         newVisit.addProcedure(make_unique<Surgery>(price, dose, level));
                     } 
-                    else if (procType == "DiagnosticTest") {
+                    else if (procType == "DIAGNOSTIC TEST") {
                         string testType, result;
                         getline(procStream, testType, '|');
                         getline(procStream, result, '\n');

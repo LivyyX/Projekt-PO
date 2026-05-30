@@ -88,7 +88,7 @@ int main() {
                     if (history.empty()) {
                         cout << "[Brak zarejestrowanych wizyt dla tego pacjenta]\n";
                     } else {
-                        for (auto& visit : history) {
+                        for (const auto& visit : history) {
                             visit.finalize();
                         }
                     }
