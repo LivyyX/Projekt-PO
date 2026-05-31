@@ -99,10 +99,15 @@ void ClinicManager::saveToFile(string filename) {
             }
         }
     }
-
+    try {
     fileHandler.save(filename, ss.str());
     cout << "Pomyslnie wygenerowano dane i przekazano do zapisu." << endl;
     cout << ss.str();
+    } 
+    catch (const runtime_error& e) {
+        cerr << "[BLAD KRYTYCZNY] Zapis bazy danych nie powiódł się." << endl;
+        cerr << "Szczegóły błędu: " << e.what() << endl;
+    }
 }
 
 void ClinicManager::loadFromFile(string filename) {
@@ -121,7 +126,8 @@ void ClinicManager::loadFromFile(string filename) {
     // Przetwarzamy plik linia po linii
     while (getline(ss, line)) {
         if (line.empty()) continue;
-
+        
+        try{
         stringstream lineStream(line);
         string type;
         getline(lineStream, type, '|');
@@ -242,11 +248,14 @@ void ClinicManager::loadFromFile(string filename) {
             if (anim != nullptr) {
                 anim->addVisit(move(newVisit));
             } else {
-                cout << "[Ostrzezenie] Nie znaleziono zwierzaka o ID " << id 
-                    << " dla wczytywanej wizyty z dnia " << date << endl;
+                throw runtime_error("Wizyta w pliku odwoluje sie do nieistniejacego ID zwierzaka: " + to_string(id));
             }
         }
     }
+    catch (const exception& e) {
+        cerr << "[Ostrzezenie]  Pominieto uszkodzona linie danych w pliku. Szczegoly: " << e.what() << endl;
+    }
     cout << "Pomyslnie wczytano baze danych z pliku: " << filename << endl;
     cout << "Wczytano wlascicieli: " << owners.size() << ", zwierzat: " << patients.size() << endl;
+}
 }

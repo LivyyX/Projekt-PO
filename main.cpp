@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <limits>
+#include <stdexcept>
 
 #include "Core/ClinicManager.h"
 #include "Models/Animal.h"
@@ -35,7 +36,12 @@ int main() {
     const string dataFileid = "baza_kliniki.txt";
 
     cout << "Inicjalizacja systemu...\n";
-    clinic.loadFromFile(dataFileid);
+    try {
+        clinic.loadFromFile(dataFileid);
+    } catch (const exception& e) {
+        cout << "[BLAD KRYTYCZNY] Nie udalo sie poprawnie wczytac bazy: " << e.what() << "\n";
+        cout << "System uruchomia sie z pusta baza danych.\n";
+    }
 
     int choice = 0;
     while (true) {
@@ -55,28 +61,50 @@ int main() {
                 double weight;
 
                 cout << "Podaj numer telefonu wlasciciela: "; getline(cin, phoneNb);
-                cout << "Podaj ID zwierzaka: "; cin >> id; clearInput();
+                cout << "Podaj ID zwierzaka: "; 
+                if (!(cin >> id)){cout << "Blad. ID musi byc liczba.\n"; clearInput(); break;}
+                clearInput();
                 cout << "Imię zwierzaka: "; getline(cin, name);
                 cout << "Gatunek: "; getline(cin, species);
-                cout << "Waga (kg): "; cin >> weight; clearInput();
+                cout << "Waga (kg): ";
+                if (!(cin >> weight)){cout << "Blad. Waga musi byc liczba.\n"; clearInput(); break;}
+                clearInput();
 
-                if(clinic.findOwnerByPhoneNb(phoneNb) == nullptr){
-                    cout << "\n--- REJESTRACJA NOWEGO WLASCICIELA ---\n";
-                    cout << "Imię : "; getline(cin, fName);
-                    cout << "Nazwisko: "; getline(cin, lName);
-                    clinic.addOwner(Owner(fName, lName, phoneNb)); 
-                }
+                try{
+                    if (phoneNb.empty() || name.empty() || species.empty()) {
+                        throw invalid_argument("Pola danych (telefon, imie, gatunek) nie moga byc puste.");
+                    }  
+                    if (clinic.findAnimal(id) != nullptr) {
+                        throw invalid_argument("Zwierzak o podanym ID " + to_string(id) + " juz istnieje w bazie danych!");
+                    }
+                    if(clinic.findOwnerByPhoneNb(phoneNb) == nullptr){
+                        cout << "\n--- REJESTRACJA NOWEGO WLASCICIELA ---\n";
+                        cout << "Imię : "; getline(cin, fName);
+                        cout << "Nazwisko: "; getline(cin, lName);
+                        if (fName.empty() || lName.empty()) {
+                            throw invalid_argument("Imie i nazwisko wlasciciela nie moga byc puste!");
+                        }
+                        clinic.addOwner(Owner(fName, lName, phoneNb)); 
+                    }
 
                 Animal newAnimal(id, name, species, weight);
                 clinic.registerAnimal(move(newAnimal), phoneNb); 
-                break; 
+                cout << "Rejestracja zakonczona sukcesem.\n";
+            }
+                catch(const invalid_argument& e){
+                    cout << "\n[BLAD WALIDACJI] Dane pacjenta sa niepoprawne.\n";
+                    cout << "Szczegoly: " << e.what() << "\n";
+                    cout << "Przerwano rejestracje. Sprobuj ponownie.\n";
+                }
+                break;
             }
 
             case 2: {
                 cout << "\n--- WYSZUKIWANIE PACJENTA ---\n";
                 int id;
                 cout << "Podaj id zwierzaka do wyszukania: ";
-                cin >> id;
+                if (!(cin >> id)) { cout << "Blad. ID musi byc liczba.\n"; clearInput(); break; }
+                clearInput();
 
                 Animal* patient = clinic.findAnimal(id);
                 if (patient != nullptr) {
@@ -101,7 +129,7 @@ int main() {
                 cout << "\n--- KREATOR WIZYTY MEDYCZNEJ ---\n";
                 int animalid;
                 cout << "Dla jakiego zwierzaka chcesz dodac wizyte? (Podaj id): ";
-                cin>>animalid;
+                if (!(cin >> animalid)) { cout << "Blad. ID musi byc liczba.\n"; clearInput(); break; }
                 clearInput();
 
                 Animal* patient = clinic.findAnimal(animalid);
@@ -126,37 +154,64 @@ int main() {
                     cout << "Wybor: ";
                     
                     int procChoice;
-                    cin >> procChoice; clearInput();
+                    if(!( cin >> procChoice)){
+                        cout << "wybor musi byc liczba.\n";
+                        clearInput();
+                        continue;
+                    }
+                    clearInput();
 
-                    if (procChoice == 1) {
-                        double price;
-                        string vType, nextDate;
-                        cout << "Cena szczepienia (zl): "; cin >> price; clearInput();
-                        cout << "Nazwa szczepionki: "; getline(cin, vType);
-                        cout << "Data kolejnej dawki: "; getline(cin, nextDate);
+                    try{    
+                        if (procChoice == 1) {
+                            double price;
+                            string vType, nextDate;
+                            cout << "Cena szczepienia (zl): ";
+                            if (!(cin >> price)) throw invalid_argument("Wprowadzona cena musi byc liczba!");
+                            clearInput();
+                            cout << "Nazwa szczepionki: "; getline(cin, vType);
+                            cout << "Data kolejnej dawki: "; getline(cin, nextDate);
                         
-                        newVisit.addProcedure(make_unique<Vaccination>(price, vType, nextDate));
-                    } 
-                    else if (procChoice == 2) {
-                        double price, anesthesia;
-                        int complexity;
-                        cout << "Cena operacji (zl): "; cin >> price; clearInput();
-                        cout << "Dawka narkozy (ml): "; cin >> anesthesia; clearInput();
-                        cout << "Poziom skomplikowania (1-5): "; cin >> complexity; clearInput();
+                            newVisit.addProcedure(make_unique<Vaccination>(price, vType, nextDate));
+                            cout << "[Dodano szczepienie]\n";
+                        } 
+                        else if (procChoice == 2) {
+                            double price, anesthesia;
+                            int complexity;
+                            cout << "Cena operacji (zl): ";
+                            if (!(cin >> price)) throw invalid_argument("Wprowadzona cena musi byc liczba.");
+                            clearInput();
+                            cout << "Dawka narkozy (ml): ";
+                            if (!(cin >> anesthesia)) throw invalid_argument("Wprowadzona dawka musi byc liczba.");
+                            clearInput();
+                            cout << "Poziom skomplikowania (1-5): ";
+                            if (!(cin >> complexity)) throw invalid_argument("Wprowadzony poziom musi byc liczba.");
+                            clearInput();
 
                         newVisit.addProcedure(make_unique<Surgery>(price, anesthesia, complexity));
-                    } 
-                    else if (procChoice == 3) {
-                        double price;
-                        string tType, val;
-                        cout << "Cena badania (zl): "; cin >> price; clearInput();
-                        cout << "Typ badania (np. Krew, Usg): "; getline(cin, tType);
-                        cout << "Wynik badania: "; getline(cin, val);
+                        cout << "[Dodano operacje]\n";
+                        } 
+                        else if (procChoice == 3) {
+                            double price;
+                            string tType, val;
+                            cout << "Cena badania (zl): ";
+                            if (!(cin >> price)) throw invalid_argument("Wprowadzona cena musi byc liczba.");
+                            clearInput();
+                            cout << "Typ badania (np. Krew, Usg): "; getline(cin, tType);
+                            cout << "Wynik badania: "; getline(cin, val);
 
-                        newVisit.addProcedure(make_unique<DiagnosticTest>(price, tType, val));
-                    } 
-                    else if (procChoice == 4) {
-                        addingProcedures = false;
+                            newVisit.addProcedure(make_unique<DiagnosticTest>(price, tType, val));
+                            cout << "[Dodano badanie diagnostyczne]\n";
+                        } 
+                        else if (procChoice == 4) {
+                            addingProcedures = false;
+                        }else{
+                            cout <<"Niepoprawny wybor procedury.\n";
+                        }
+                    }
+                    catch(const invalid_argument& e){
+                        cout << "\n[BLAD PROCEDURY] Podano nieprawidlowe dane szczegolowe.\n";
+                        cout << "Przyczyna: " << e.what() << "\n";
+                        cout << "Ta konkretna procedura nie zostala dodana. Sprobuj jeszcze raz.\n";
                     }
                 }
                 newVisit.finalize(); 
@@ -169,8 +224,13 @@ int main() {
 
             case 4: {
                 cout << "Zapisywanie danych do pliku...\n";
-                clinic.saveToFile(dataFileid);
-                cout << "Dane zapisane pomyślnie. Zamykanie aplikacji.\n";
+                try{
+                    clinic.saveToFile(dataFileid);
+                    cout << "Dane zapisane pomyślnie. Zamykanie aplikacji.\n";
+                }catch (const exception& e){
+                    cout << "[BLAD KRYTYCZNYZAPISU] Pliknie zostal zapisany: " << e.what() << "\n";
+                    cout << "Upewnij sie, ze masz uprawnienia do zapisu i wolne miejsce na dysku.\n";
+                }
                 return 0;
             }
 

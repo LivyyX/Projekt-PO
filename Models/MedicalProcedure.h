@@ -2,6 +2,7 @@
 #define MEDICALPROCEDURE_H
 
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -11,7 +12,12 @@ protected:
     double basePrice;
 
 public:
-    MedicalProcedure(double basePrice) : basePrice(basePrice){}
+    MedicalProcedure(double basePrice) {
+        if (basePrice<0.0){
+            throw invalid_argument("Cena nie może być ujemna.");
+        }
+            this->basePrice = basePrice;
+        }
 
     virtual ~MedicalProcedure() = default;
 

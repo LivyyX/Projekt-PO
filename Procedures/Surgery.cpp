@@ -1,11 +1,18 @@
 #include "Surgery.h"
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
 Surgery::Surgery(double price, double dose, int level) 
     : MedicalProcedure(price) {
+    if (level < 1 || level > 5) {
+        throw invalid_argument("Poziom trudnosci musi byc w zakresie 1-5. Podano:" + to_string(level));
+    }
+    if (dose <= 0.0) {
+        throw invalid_argument("Dawka narkozy musi byc wieksza od zera. Podano: " + to_string(dose));
+    }
     this->anesthesiaDose = dose;
     this->complexityLevel = level;
 }
