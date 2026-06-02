@@ -2,9 +2,24 @@
 #include <ostream>
 using namespace std;
 
-Owner::Owner(string fName, string lName, string phone)
-    : firstName(fName), lastName(lName), phoneNumber(phone) {}
+bool isValidPhone(const string& phone) {
+    if (phone.length() != 9) return false;
+    for (int i = 0; i < 9; i++) {
+        if (!isdigit(phone[i])) {
+            return false; 
+        }
+    }
+    return true;
+}
 
+Owner::Owner(string fName, string lName, string phone){
+    if (!isValidPhone(phone)) {
+        throw invalid_argument("Niepoprawny numer telefonu. Oczekiwano 9 cyfr bez spacji.");
+    }
+    this->firstName = fName;
+    this->lastName = lName;
+    this->phoneNumber = phone;
+}
 void Owner::addAnimal(Animal* animal) {
     if (animal != nullptr) {
         animals.push_back(animal);
