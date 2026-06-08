@@ -102,7 +102,6 @@ void ClinicManager::saveToFile(string filename) {
     try {
     fileHandler.save(filename, ss.str());
     cout << "Pomyslnie wygenerowano dane i przekazano do zapisu." << endl;
-    cout << ss.str();
     } 
     catch (const runtime_error& e) {
         cerr << "[BLAD KRYTYCZNY] Zapis bazy danych nie powiódł się." << endl;

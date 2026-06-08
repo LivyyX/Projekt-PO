@@ -141,9 +141,10 @@ int main() {
                 string date, description;
                 cout << "Data wizyty (DD-MM-YYYY): "; getline(cin, date);
                 cout << "Ogólny opis/powód wizyty: "; getline(cin, description);
-
+                
+                try{
                 Visit newVisit(date, description);
-
+                
                 bool addingProcedures = true;
                 while (addingProcedures) {
                     cout << "\nDodaj procedure do tej wizyty:\n";
@@ -219,6 +220,10 @@ int main() {
 
                 patient->addVisit(move(newVisit));
                 cout << "Wizyta zostala pomyslnie dopisana do karty pacjenta.\n";
+                }catch(const invalid_argument& e) {
+                    cout << "\n[BLAD REJESTRACJI WIZYTY]: " << e.what() << "\n";
+                    cout << "Powrot do głównego menu. Sprobuj dodac wizyte ponownie z poprawnymi danymi.\n";
+                }
                 break;
             }
 
