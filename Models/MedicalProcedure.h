@@ -12,12 +12,12 @@ protected:
     double basePrice;
 
 public:
-    MedicalProcedure(double basePrice) {
-        if (basePrice<0.0){
+    MedicalProcedure(double newPrice) {
+        if (newPrice < 0.0) {
             throw invalid_argument("Cena nie może być ujemna.");
         }
-            this->basePrice = basePrice;
-        }
+        this->basePrice = newPrice;
+    }
 
     virtual ~MedicalProcedure() = default;
 

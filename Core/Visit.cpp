@@ -25,12 +25,12 @@ bool isValidDate(const string& date) {
     return true;
 }
 
-Visit::Visit(string date, string description) {
-    if (!isValidDate(date)) {
+Visit::Visit(string newDate, string newDescription) {
+    if (!isValidDate(newDate)) {
         throw invalid_argument("Nieprawidlowy format lub wartosc daty. Oczekiwano DD-MM-YYYY.");
     }
-    this->date = date;
-    this->description = description;
+    this->date = newDate;
+    this->description = newDescription;
 }
 
 void Visit::addProcedure(unique_ptr<MedicalProcedure> procedure) {
