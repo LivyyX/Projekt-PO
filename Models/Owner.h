@@ -25,6 +25,7 @@ public:
     string getFullName() const;
     string getPhoneNumber() const { return phoneNumber; }
     void serialize(ostream& os) const;
+    void setPhoneNumber(string newPhone) { phoneNumber = newPhone; }
 };
 
 #endif

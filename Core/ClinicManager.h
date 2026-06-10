@@ -24,6 +24,7 @@ public:
     Owner* findOwnerByAnimalId(int animalId);
     Owner* findOwnerByPhoneNb(string PhoneNumber);
     void addOwner(const Owner& owner);
+    bool updateOwnerPhone(string oldPhone, string newPhone);
 };
 
 #endif

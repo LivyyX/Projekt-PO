@@ -26,7 +26,8 @@ void displayMenu() {
     cout << "1. Zarejestruj nowego pacjenta i właściciela\n";
     cout << "2. Wyszukaj pacjenta i wyswietl historie leczenia\n";
     cout << "3. Dodaj nowa wizyte (i wykonaj procedury medyczne)\n";
-    cout << "4. Zapisz dane i zamknij system\n";
+    cout << "4. Zmiana numeru telefonu wlasciciela\n"; 
+    cout << "5. Zapisz dane i zamknij system\n";
     cout << "========================================\n";
     cout << "Wybor: ";
 }
@@ -226,8 +227,25 @@ int main() {
                 }
                 break;
             }
-
             case 4: {
+                cout << "\n--- ZMIANA NUMERU TELEFONU WLASCICIELA ---\n";
+                string oldPhone, newPhone;
+
+                cout << "Podaj AKTUALNY numer telefonu właściciela: ";
+                getline(cin, oldPhone);
+
+                cout << "Podaj NOWY numer telefonu: ";
+                getline(cin, newPhone);
+
+                if (clinic.updateOwnerPhone(oldPhone, newPhone)) {
+                    cout << "[SUKCES] Numer telefonu został pomyślnie zaktualizowany.\n";
+                    cout << "[INFO] Pamiętaj, aby zapisać dane przed wyjściem z programu (opcja 5)!\n";
+                } else {
+                    cout << "[BŁĄD] Nie znaleziono właściciela o numerze: " << oldPhone << "\n";
+                }
+                break;
+            }
+            case 5: {
                 cout << "Zapisywanie danych do pliku...\n";
                 try{
                     clinic.saveToFile(dataFileid);

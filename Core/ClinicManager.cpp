@@ -258,3 +258,12 @@ void ClinicManager::loadFromFile(string filename) {
     cout << "Wczytano wlascicieli: " << owners.size() << ", zwierzat: " << patients.size() << endl;
 }
 }
+
+bool ClinicManager::updateOwnerPhone(string oldPhone, string newPhone) {
+    Owner* owner = findOwnerByPhoneNb(oldPhone);
+    if (owner != nullptr) {
+        owner->setPhoneNumber(newPhone);
+        return true;
+    }
+    return false;
+}
